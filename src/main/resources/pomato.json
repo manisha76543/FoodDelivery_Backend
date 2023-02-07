@@ -1,0 +1,412 @@
+[
+  {
+    "endpoint": "login",
+    "path": "/login",
+    "method": "POST",
+    "request:data": {
+      "email": {
+        "type": "String",
+        "max": 50,
+        "required": true,
+        "unique": true
+      },
+      "password": {
+        "type": "String",
+        "max": 50,
+        "required": true
+      }
+    },
+    "response": [
+      {
+        "status": "success",
+        "response-data": {
+          "http-status": 200,
+          "message": "login successful",
+          "object": "user"
+        }
+      },
+      {
+        "status": "client-error",
+        "response-data": {
+          "http-status": 400,
+          "message": "bad request"
+        }
+      }
+    ]
+  },
+  {
+    "endpoint": "customerSignup",
+    "path": "/customersignup",
+    "method": "POST",
+    "request:data": {
+      "name": {
+        "type": "String",
+        "max": 25,
+        "required": true,
+        "unique": false
+      },
+      "contactNumber": {
+        "type": "String",
+        "max": 10,
+        "required": true,
+        "unique": true
+      },
+      "role": {
+        "type": "String",
+        "max": 10,
+        "required": true,
+        "unique": false
+      },
+      "email": {
+        "type": "String",
+        "max": 50,
+        "required": true,
+        "unique": true
+      },
+      "password": {
+        "type": "String",
+        "max": 50,
+        "required": true
+      }
+    },
+    "response": [
+      {
+        "status": "success",
+        "response-data": {
+          "http-status": 200,
+          "message": "sign successful"
+        }
+      },
+      {
+        "status": "client-error",
+        "response-data": {
+          "http-status": 400,
+          "message": "bad request"
+        }
+      }
+    ]
+  },
+  {
+    "endpoint": "restaurants",
+    "path": "/restaurants",
+    "method": "GET",
+    "response": {
+        "status": "success",
+        "response-data": {
+          "http-status": 200,
+          "message": "Successfully executed.",
+          "restaurantList": {
+            "type": "List of restaurants"
+          }
+        }
+    }
+  },
+  {
+    "endpoint": "restaurantItems",
+    "path": "/restaurants/getItems/{restaurantId}",
+    "method": "GET",
+    "response": [
+      {
+        "status": "success",
+        "response-data": {
+          "http-status": 200,
+          "message": "Successfully executed.",
+          "itemList": {
+            "type": "List of items"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "endpoint": "placeOrder",
+    "path": "/placeorder",
+    "method": "POST",
+    "response": [
+      {
+        "status": "success",
+        "response-data": {
+          "http-status": 200,
+          "message": "Order created successfully!"
+        }
+      }
+    ],
+    "request:data": {
+      "address": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "Number"
+      },
+      "paymentMethod": {
+        "type": "String"
+      },
+      "listOfItems": {
+        "type": "Array of items"
+      },
+      "restaurantId": {
+        "type": "Number"
+      },
+      "userId": {},
+      "type": "Number"
+    }
+  },
+  {
+    "endpoint": "managerSignUp",
+    "path": "/managersignup",
+    "method": "POST",
+    "request:data": {
+      "name": {
+        "type": "String",
+        "max": 25,
+        "required": true,
+        "unique": false
+      },
+      "contactNumber": {
+        "type": "String",
+        "max": 10,
+        "required": true,
+        "unique": true
+      },
+      "role": {
+        "type": "String",
+        "max": 10,
+        "required": true,
+        "unique": false
+      },
+      "email": {
+        "type": "String",
+        "max": 50,
+        "required": true,
+        "unique": true
+      },
+      "password": {
+        "type": "String",
+        "max": 50,
+        "required": true
+      },
+      "restaurant-name": {
+        "type": "String",
+        "max": 50,
+        "required": true
+      },
+      "restaurant-address": {
+        "type": "String",
+        "max": 255,
+        "required": true
+      },
+      "restaurant-image": {
+        "type": "Longblob"
+      }
+    },
+    "response": [
+      {
+        "status": "success",
+        "response-data": {
+          "http-status": 200,
+          "message": "sign successful"
+        }
+      },
+      {
+        "status": "client-error",
+        "response-data": {
+          "http-status": 400,
+          "message": "bad request"
+        }
+      }
+    ]
+  },
+  {
+    "endpoint": "addItem",
+    "path": "/additem/{restaurantId}",
+    "method": "POST",
+    "request:data": {
+      "name": {
+        "type": "String",
+        "max": 50,
+        "required": true
+      },
+      "cuisine-type": {
+        "type": "String",
+        "max": 255,
+        "required": true
+      },
+      "price": {
+        "type": "decimal",
+        "required": true
+      },
+      "description": {
+        "type": "String",
+        "max": 255,
+        "required": true
+      },
+      "item-image": {
+        "type": "Longblob"
+      },
+      "userId": {
+        "type": "Number",
+        "required": true
+      }
+    },
+    "response": {
+      "data": "addItemResponse-object"
+    }
+  },
+  {
+    "endpoint": "updateItem",
+    "path": "/updateitem/{restaurantId}/{itemId}",
+    "method": "PUT",
+    "request:data": {
+      "name": {
+        "type": "String",
+        "max": 50,
+        "required": true
+      },
+      "cuisine-type": {
+        "type": "String",
+        "max": 255,
+        "required": true
+      },
+      "price": {
+        "type": "decimal",
+        "required": true
+      },
+      "description": {
+        "type": "String",
+        "max": 255,
+        "required": true
+      },
+      "item-image": {
+        "type": "Longblob"
+      },
+      "itemId": {
+        "type": "Number"
+      },
+      "userId": {
+        "type": "Number"
+      },
+      "restaurantId": {
+        "type": "Number"
+      }
+    },
+    "response": {
+      "data": "item-object"
+    }
+  },
+  {
+    "endpoint": "deleteItem",
+    "path": "/deleteitem/{restaurantId}/{itemId}",
+    "method": "DELETE",
+    "response": {
+      "status": "success",
+      "response-data": {
+        "http-status": 200,
+        "message": "Successfully deleted"
+      }
+    }
+  },
+  {
+    "endpoint": "viewordersmanager",
+    "path": "/viewordersmanager/{userId}/{restaurantId}",
+    "method": "GET",
+    "response": {
+      "data": "List of orders"
+    }
+  },
+  {
+    "endpoint": "vieworderscustomer",
+    "path": "/vieworderscustomer/{userId}",
+    "method": "GET",
+    "response": {
+      "data": "List of orders"
+    }
+  },
+  {
+    "endpoint": "deleteRestaurant",
+    "path": "/restaurant/delete/{restaurantId}",
+    "method": "DELETE",
+    "response": {
+      "status": "success",
+      "http-status": 200,
+      "message": "Successfully deleted"
+    }
+  },
+  {
+    "endpoint": "uploadImage",
+    "path": "/uploadimage",
+    "method": "POST",
+    "response": {
+      "status": true,
+      "http-status": 200,
+      "message": "Success"
+    }
+  },
+  {
+    "endpoint": "logout",
+    "path": "/logout/{userId}",
+    "method": "PUT",
+    "response": [
+      {
+        "status": "success",
+        "response-data": {
+          "http-status": 200,
+          "message": "sign successful"
+        }
+      },
+      {
+        "status": "client-error",
+        "response-data": {
+          "http-status": 400,
+          "message": "bad request"
+        }
+      }
+    ]
+  },
+  {
+    "endpoint": "viewAllOrders",
+    "path": "viewallorders",
+    "method": "GET",
+    "response": [
+      {
+        "status": "success",
+        "response-data": {
+          "http-status": 200,
+          "message": "sign successful"
+        }
+      },
+      {
+        "status": "client-error",
+        "response-data": {
+          "http-status": 400,
+          "message": "bad request"
+        }
+      }
+    ]
+  },
+  {
+    "endpoint": "viewAllPayments",
+    "path": "viewallpayments",
+    "method": "GET",
+    "response": [
+      {
+        "status": "success",
+        "response-data": {
+          "http-status": 200,
+          "message": "sign successful"
+        }
+      },
+      {
+        "status": "client-error",
+        "response-data": {
+          "http-status": 400,
+          "message": "bad request"
+        }
+      }
+    ]
+  },
+  {
+    "endpoint": "chceckout",
+    "path": "/checkout/{userId}",
+    "method": "POST"
+  }
+]
